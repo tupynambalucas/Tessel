@@ -24,7 +24,7 @@ export default defineConfig([
 
   // 2. Configuração Global
   {
-    name: 'monorepo/global-typescript-config',
+    name: 'tessel/global-typescript-config',
     files: ['**/*.{js,mjs,ts,tsx}'],
     languageOptions: {
       parserOptions: {
@@ -111,7 +111,7 @@ export default defineConfig([
 
   // 3. Ignores Globais
   {
-    name: 'monorepo/ignores',
+    name: 'tessel/ignores',
     ignores: [
       '**/dist/**',
       '**/node_modules/**',
@@ -136,7 +136,7 @@ export default defineConfig([
 
   // 4. Config Files na Raiz
   {
-    name: 'monorepo/root-config-files',
+    name: 'tessel/root-config-files',
     files: ['*.{js,mjs,ts}', '*.config.{js,mjs,ts}'],
     languageOptions: {
       parserOptions: {
@@ -160,15 +160,53 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-member-access': 'off',
     },
   },
-
-  // 5. Package Engine Core
+  // ========================================================================
+  // PACKAGES/BACKEND
+  // ========================================================================
   {
-    name: 'monorepo/packages-engine-core',
-    files: ['packages/engine-core/**/*.{js,mjs,ts,tsx}'],
+    name: 'tessel/packages-backend',
+    files: ['packages/backend/**/*.{js,mjs,ts,tsx}'],
     languageOptions: {
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: path.join(__dirname, 'packages/engine-core'),
+        tsconfigRootDir: path.join(__dirname, 'packages/backend'),
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: false, // Fastify handlers
+        },
+      ],
+      '@typescript-eslint/require-await': 'warn',
+      '@typescript-eslint/no-floating-promises': 'error',
+
+      // Backend-specific
+      'no-process-env': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    },
+  },
+  // ========================================================================
+  // PACKAGES/CORE
+  // ========================================================================
+  {
+    name: 'tessel/packages-core',
+    files: ['packages/core/**/*.{js,mjs,ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: path.join(__dirname, 'packages/core'),
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
@@ -189,19 +227,21 @@ export default defineConfig([
     },
   },
 
-  // 6. Package Engine React
+  // ========================================================================
+  // PACKAGES/Game
+  // ========================================================================
   {
-    name: 'monorepo/packages-engine-react',
-    files: ['packages/engine-react/**/*.{js,mjs,ts,tsx}'],
+    name: 'tessel/packages-game',
+    files: ['packages/game/**/*.{js,mjs,ts,tsx}'],
     ignores: [
-      'packages/engine-react/src/types/**/*.d.ts',
-      'packages/engine-react/**/*.d.ts',
-      'packages/engine-react/src/vite-env.d.ts',
+      'packages/game/src/types/**/*.d.ts',
+      'packages/game/**/*.d.ts',
+      'packages/game/src/vite-env.d.ts',
     ],
     languageOptions: {
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: path.join(__dirname, 'packages/engine-react'),
+        tsconfigRootDir: path.join(__dirname, 'packages/game'),
         ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: {
@@ -224,7 +264,7 @@ export default defineConfig([
       },
       'import/resolver': {
         typescript: {
-          project: path.join(__dirname, 'packages/engine-react/tsconfig.json'),
+          project: path.join(__dirname, 'packages/game/tsconfig.json'),
           alwaysTryTypes: true,
         },
         node: {
@@ -303,10 +343,40 @@ export default defineConfig([
       '@typescript-eslint/consistent-indexed-object-style': 'off',
     },
   },
-
+  // ========================================================================
+  // PACKAGES/WORKSPACE - Internal tooling, scripts and art assets & 3d modeling
+  // ========================================================================
+  {
+    name: 'tessel/studio',
+    files: ['studio/**/*.{js,mjs,ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: path.join(__dirname, 'studio'),
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
+      // Workspace scripts podem usar console.info e console.warn
+      'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
+      '@typescript-eslint/no-explicit-any': 'warn', // Facilitar prototipagem de scripts
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+    },
+  },
   // 7. Generated Models
   {
-    name: 'monorepo/generated-models-shimming',
+    name: 'tessel/generated-models-shimming',
     files: ['**/*.model.tsx'],
     rules: {
       '@typescript-eslint/consistent-type-imports': 'off',

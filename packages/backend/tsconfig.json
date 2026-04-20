@@ -13,11 +13,9 @@
     "noEmit": false,
     "baseUrl": ".",
     "paths": {
-      "@elo-organico/shared": ["../shared/src/index.ts"]
+      "@tessel/core": ["../core/src/index.ts"]
     }
   },
   "include": ["src"],
-  "references": [
-    { "path": "../shared" }
-  ]
+  "references": [{ "path": "../core" }]
 }

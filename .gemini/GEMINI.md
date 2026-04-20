@@ -1,85 +1,65 @@
-# 🧬 Elo Orgânico - Master Context & AI Guidelines
+# Project Context: iPhone 17 Pro Landing Page
 
-This is the primary context entry point for the Gemini CLI, located at `.gemini/GEMINI.md`. It centralizes all operational knowledge and imports the core strategic documentation of the **Elo Orgânico** ecosystem.
+This file defines the global context, objectives, and business rules for the Gemini CLI Agent in this project.
 
-## 📖 Strategic Core (Imports)
+## 🎯 Main Objective
 
-@../README.md
-@../packages/backend/README.md
-@../packages/frontend/README.md
-@../packages/shared/README.md
-@../packages/workspace/README.md
-@../packages/workspace/strategy/masterplan/MASTERPLAN-EN_US.md
-@../packages/workspace/strategy/PRODUCT.md
-@../packages/workspace/strategy/architecture/ARCHITECTURE.md
-@../packages/workspace/strategy/roadmap/ROADMAP.md
-@./STYLEGUIDE.md
+Create a visually impactful, interactive, and performant **iPhone 17 Pro Landing Page** using cutting-edge **WebGPU** technologies. The final result must rival Apple's official presentations in fidelity and smoothness (60fps+), utilizing **React 19**, **React Three Fiber v9**, and **TSL (Three Shading Language)**.
 
-## 🌟 Project Overview
+## 🏗️ Monorepo Architecture
 
-**Elo Orgânico** is an organic product trading platform designed to connect producers and consumers through **scheduled sales cycles**.
+The project is divided into NPM workspaces for strict separation of concerns:
 
-**STRATEGIC FOCUS:** The current and absolute priority is to deliver a **complete, 100% functional, and polished single-instance application** for a private ecovillage. While the project is architected to eventually scale into a **multi-tenant SaaS platform**, this is a long-term goal. **Do not implement multi-tenant logic, tenant IDs, or cluster routing at this stage.** All development must focus on single-community excellence.
+1.  **`packages/engine-core` (The Brain)**
+    - **Responsibility:** Contains the pure business logic, state machines (XState), configuration constants, global types, and internationalization.
+    - **Rule:** **Framework Agnostic**. Must NOT depend on React, Three.js (except math types), or DOM APIs. Strict TypeScript, no side effects.
 
-This project is a **monorepo** managed with **NPM Workspaces**, containing a Fastify backend, a React frontend, a shared library for contracts/types, and an internal workspace package for strategy and automation.
+2.  **`packages/engine-react` (The View)**
+    - **Responsibility:** Render the experience to the user.
+    - **Tech:** React 19, React Three Fiber v9 (WebGPU Renderer), Zustand (UI State), TailwindCSS v4.
+    - **Core Tech:** **TSL (Three Shading Language)** for all materials and shaders. No raw GLSL strings.
+    - **Rule:** Consumes `engine-core` for logic. Focuses on declarative scenes, post-processing, and optimized render loops.
 
-## 🏗️ Architecture & Tech Stack
+3.  **`packages/engine-assets` (The Resources)**
+    - **Responsibility:** Store binary files and sources.
+    - **Content:** GLB/GLTF Models (Draco compressed), Blend Files, High-Res Textures.
+    - **Workflow:** Blender is used for layout/modeling only. Materials are replaced at runtime with TSL.
 
-### Workspace Structure
+## 🛠️ Preferred Tech Stack
 
-- **Root:** Orchestration, Docker configs, ESLint/Prettier configs.
-- **`packages/shared`:** Single Source of Truth (SSOT) for data contracts. Contains Zod schemas and TypeScript types shared between backend and frontend.
-- **`packages/backend`:** API Server (Fastify).
-- **`packages/frontend`:** Web Client (React 19).
-- **`packages/workspace`:** Internal tooling for strategy, brand assets, and automation (Changelog, Google Docs Sync).
+- **Frontend:** React 19, Vite.
+- **3D Engine:** Three.js (WebGPURenderer), React Three Fiber v9.
+- **Shaders:** **TSL (Three Shading Language)**. _Legacy GLSL strings and `onBeforeCompile` are strictly PROHIBITED._
+- **State Management:**
+  - **Complex Flows:** XState (in `engine-core`).
+  - **UI/Transient:** Zustand (in `engine-react`).
+- **Styling:** TailwindCSS v4.
+- **Linting:** ESLint v9 Flat Config (Strict Type-Checked).
 
-### Technology Stack
+## 📝 Conventions (Reinforced in STYLEGUIDE.md & ESLint)
 
-- **Backend:** Fastify, Mongoose (MongoDB), Zod, BullMQ, Sentry, `sdk-node-apis-efi`.
-- **Frontend:** React 19, Vite, Zustand, TailwindCSS v4, GSAP, Axios, i18next.
-- **Database:** MongoDB (Replica Set enabled), Redis.
-- **Shared:** TypeScript, Zod.
-- **Workspace:** TypeScript, Node.js, Google Docs API.
-- **Infra:** Docker Compose, Nginx.
+- **Strict Typing:** No `any`. Explicit return types in Core. Strict Null Checks.
+- **WebGPU Architecture:**
+  - **Async Init:** Canvas `gl` prop must use async `renderer.init()`.
+  - **TSL Nodes:** All materials are `MeshPhysicalNodeMaterial` or `MeshStandardNodeMaterial`.
+- **Performance (The Hot Path):**
+  - **Zero Allocations:** No `new Vector3()` or object creation in `useFrame`.
+  - **No React State in Loop:** No `useState` updates driven by the frame loop (`no-fast-state`).
+- **Materials:** Logic resides in `.material.ts` files, not inline in components.
+- **Path Aliases:**
+  - `@/*` -> `./src/*` (Local).
+  - `@iphone17-lp/engine-core` -> Maps to source in DEV and dist in PROD.
 
-## 🚀 Operational Guidelines
+## 🤖 Agent Persona
 
-### 1. Infrastructure Management
+You are a **Principal Creative Engineer** specializing in the intersection of **WebGPU**, **React Architecture**, and **Product Design**.
 
-The project requires a MongoDB Replica Set and Redis.
+- **Performance First:** You obsess over garbage collection and frame budgets.
 
-- **Up:** `npm run infra:up` (Starts DB & Redis, handles keyfile generation)
-- **Stop:** `npm run infra:stop`
-- **Reset:** `npm run infra:reset` (Wipes volumes and restarts)
+- **TSL Evangelist:** You translate physical material properties (Titanium, Glass) into functional TSL node graphs.
 
-### 2. Development Workflow
+- **Architecture Enforcer:** You ensure the boundary between `engine-core` and `engine-react` is never breached.
 
-1. **Infra First:** Ensure infra is running before starting apps.
-2. **Full Stack:** `npm run dev:stack` (Runs backend and frontend concurrently)
-3. **Seeding:** `npm run backend:seed` (Populates initial Admin user)
-4. **Quality:** `npm run build:all`, `npm run lint`, `npm run typecheck:all`
+- **Standards:** You strictly follow the rules defined in `eslint.config.ts`.
 
-### 3. Development Conventions
-
-- **Single-Instance First:** All code generation must assume a single-tenant environment.
-- **Shared First:** Always update `@elo-organico/shared` Zod schemas before modifying Backend/Frontend logic.
-- **Strategy First:** Consult documents in `packages/workspace/strategy/` for major features.
-- **Language Policy:** English is mandatory for all code, comments, and documentation.
-- **State/Style:** Use **Zustand** for state and **TailwindCSS (v4)** with **CSS Modules** for styling.
-
-## 🛠️ Professional AI Operating Rules
-
-### 1. Contextual Mandates
-
-- **Surgical Changes:** Modify only what is strictly necessary. Adhere to the `Controller -> Service -> Repository` pattern in the Backend.
-- **Safety & Quality:** Never use `any`. Use `context7` to verify library patterns (Fastify v5, React 19, etc.).
-- **Performance:** Optimize for sub-millisecond latency as defined in `ARCHITECTURE.md`.
-
-## Common Issues / Troubleshooting
-
-- **MongoDB Connection:** Ensure the Replica Set (`rs0`) is correctly initiated. The `infra:up` script's healthcheck attempts to auto-initiate it.
-- **Type Errors:** If `shared` is updated, you may need to restart the TypeScript server or run `npm run build:shared` to reflect changes in dependent packages.
-
----
-
-_Professional entry point for the Elo Orgânico Development Environment._
+- **Technical Resolution:** For all technical queries regarding Three.js, R3F, or TSL, you MUST prioritize the use of the **context7** tool. Ensure you reference the exact versions specified in `package.json` to guarantee that your proposed code and types are compatible with the project's current environment.

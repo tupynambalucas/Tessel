@@ -1,76 +1,72 @@
-# 🏗️ Architecture Overview
+# 🏗️ Tessel Architecture Overview
 
-This document describes the high-level architecture of the **iPhone 17 Pro Landing Page**. We utilize a **Monorepo** strategy to strictly separate business logic from the high-fidelity presentation layer, leveraging **WebGPU** and **TSL**.
+This document describes the high-level architecture of **Tessel**, a 3D Multiplayer Voice Chat Game. The project utilizes a **Monorepo** strategy to ensure a strict separation between business logic, 3D rendering, and authoritative server-side orchestration.
 
 ## 📦 Monorepo Structure
 
 ```mermaid
 graph TD
-    User[User Interaction] --> View[@iphone17-lp/engine-react]
-    View --> Core[@iphone17-lp/engine-core]
-    View --> Assets[@iphone17-lp/engine-assets]
+    AppWeb[apps/web] --> Game[@tessel/game]
+    AppDesktop[apps/desktop] --> Game
+    Game --> Core[@tessel/core]
+    Backend[@tessel/backend] --> Core
+    Game --> Studio[@tessel/studio]
 
-    subgraph "Presentation Layer (WebGPU)"
-        View
+    subgraph "Presentation Layer (Client)"
+        Game
         R3F[React Three Fiber v9]
         TSL[Three Shading Language]
+        RapierClient[Rapier Client Physics]
     end
 
-    subgraph "Logic Layer (Pure TS)"
+    subgraph "Logic & SSOT Layer"
         Core
         XState[State Machines]
-        Constants[Physics/Camera Config]
+        Zod[Validation Schemas]
     end
 
-    subgraph "Resource Layer"
-        Assets
-        Models[GLB Models]
-        Textures[4K Textures]
+    subgraph "Authoritative Layer (Server)"
+        Backend
+        Fastify[Fastify 5]
+        RapierServer[Rapier Server Physics]
+        Mongo[MongoDB / Mongoose]
     end
 ```
 
-### 1. `@iphone17-lp/engine-core` (The Brain)
+### 1. `@tessel/core` (The Brain)
+**Role:** The Single Source of Truth (SSOT).
+- **Framework Agnostic:** Pure TypeScript logic.
+- **Validation**: Zod schemas for all data exchanged between Client and Server.
+- **State Machines**: XState defines complex game flows (e.g., Room joining, Player lifecycle).
 
-**Role:** The single source of truth for the application state and business rules.
+### 2. `@tessel/game` (The Engine)
+**Role:** The 3D runtime and visual representation.
+- **Rendering**: Three.js with **WebGPU** and **TSL** (Three Shading Language).
+- **Client Physics**: Local prediction and interpolation using Rapier.
+- **Spatial Audio**: Real-time positional voice chat integration.
 
-- **Framework Agnostic:** Zero dependencies on React or Three.js (except math types).
-- **State Management:** XState machines define the possible states of the iPhone (e.g., `ViewingColors`, `ExploringCamera`, `StorageSelection`).
-- **Internationalization:** Contains all text and translation logic.
+### 3. `@tessel/backend` (The Authority)
+**Role:** Authoritative server orchestration.
+- **Validation**: Server-side physics validation via Rapier to prevent cheating.
+- **Room Management**: Instance-based room management with Fastify 5.
+- **Persistence**: MongoDB for user data and persistent world states.
 
-### 2. `@iphone17-lp/engine-react` (The View)
+### 4. `@tessel/studio` (The Resources)
+**Role:** Asset processing and strategic hub.
+- **Asset Pipeline**: Automated conversion of GLB models and optimization of textures.
+- **Governance**: Strategic documents and brand tokens.
 
-**Role:** The visual runtime. It translates state into pixels.
+## 🔄 Data & Physics Flow
 
-- **Tech Stack:** React 19, R3F v9, WebGPURenderer, TailwindCSS v4.
-- **Architecture Pattern: The Single Persistent Actor**
-  - We do not destroy/recreate the iPhone model between sections.
-  - A single `IphoneActor` component exists in the canvas.
-  - It listens to state changes from `engine-core` and transitions properties (rotation, material states, lighting) smoothly.
-- **TSL Implementation:** All shaders are written in TypeScript using TSL nodes, enabling runtime compilation for WebGPU.
-
-### 3. `@iphone17-lp/engine-assets` (The Resources)
-
-**Role:** Passive storage for heavy assets.
-
-- **Workflow:**
-  1.  **Blender:** Used for modeling and defining "Placeholders" (e.g., a mesh named `Screen_Glass`).
-  2.  **Export:** GLB (Draco Compressed).
-  3.  **Runtime:** `engine-react` loads the GLB, finds `Screen_Glass`, and replaces its material with a high-fidelity `GlassNodeMaterial` defined in TSL.
-
-## 🔄 Data Flow
-
-1.  **Input:** User scrolls or clicks a UI button in `engine-react`.
-2.  **Dispatch:** An action is sent to the `engine-core` State Machine (e.g., `Events.SELECT_COLOR`).
-3.  **Transition:** The Machine updates its context (e.g., `context.color = 'titanium-blue'`).
-4.  **Reaction:**
-    - The UI updates the text description.
-    - The 3D Scene detects the change.
-    - The `IphoneActor` triggers a GSAP animation to interpolate the `colorNode` of the TSL material.
+1.  **Input**: User moves their character in `app-web`.
+2.  **Prediction**: `game` package simulates the move locally for immediate feedback.
+3.  **Synchronization**: The move is sent to `backend` via a secure socket.
+4.  **Validation**: `backend` runs the same move in its Rapier instance.
+5.  **Reconciliation**: If valid, the move is broadcasted to other players. If invalid, the client is corrected.
 
 ## 🛠️ Build & Tooling
 
-- **Workspace Manager:** NPM Workspaces.
-- **Linting:** ESLint v9 Flat Config (Strict).
-- **Bundling:**
-  - `engine-core`: `tsc` (Outputs ESM).
-  - `engine-react`: `vite` (WebGPU optimized build).
+- **Workspace Manager**: NPM Workspaces.
+- **Linting**: ESLint v9 (Strict) with `@react-three` and `@typescript-eslint` plugins.
+- **Graphics**: WebGPU priority (TSL nodes only, no GLSL).
+- **Physics**: Rapier (WASM).

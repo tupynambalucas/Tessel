@@ -1,34 +1,35 @@
-# react-ts
+# @tessel/app-desktop - Desktop Application
 
-An Electron application with React and TypeScript
+Desktop version of Tessel, built with **Electron** and **Vite**. It provides a native experience with enhanced performance and deep system integration for voice chat.
 
-## Recommended IDE Setup
+## 🛠 Tech Stack
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- **Framework**: Electron
+- **Renderer**: React 19 + Vite
+- **Graphics**: WebGPU (Chromium-based)
+- **Physics**: Rapier
 
-## Project Setup
-
-### Install
-
-```bash
-$ pnpm install
-```
+## 🚦 Getting Started
 
 ### Development
 
 ```bash
-$ pnpm dev
+npm run dev
 ```
 
 ### Build
 
 ```bash
-# For windows
-$ pnpm build:win
+# For Windows
+npm run build:win
 
 # For macOS
-$ pnpm build:mac
-
-# For Linux
-$ pnpm build:linux
+npm run build:mac
 ```
+
+## 🏗 Architecture
+
+Utilizes `electron-vite` for a streamlined development experience. The main process handles window management and system-level integrations, while the renderer process hosts the game engine from `@tessel/game`.
+
+---
+*Desktop Entry Point - Tessel*

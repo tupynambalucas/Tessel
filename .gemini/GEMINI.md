@@ -1,65 +1,56 @@
-# Project Context: iPhone 17 Pro Landing Page
+# 🌌 Tessel - Master Context & AI Guidelines
 
-This file defines the global context, objectives, and business rules for the Gemini CLI Agent in this project.
+This is the primary context entry point for the Gemini CLI, located at `.gemini/GEMINI.md`. It centralizes all operational knowledge and strategic documentation for **Tessel**, a 3D Multiplayer Voice Chat Game.
 
-## 🎯 Main Objective
+## 📖 Strategic Core (Imports)
 
-Create a visually impactful, interactive, and performant **iPhone 17 Pro Landing Page** using cutting-edge **WebGPU** technologies. The final result must rival Apple's official presentations in fidelity and smoothness (60fps+), utilizing **React 19**, **React Three Fiber v9**, and **TSL (Three Shading Language)**.
+- `D:\projects\Tessel\README.md`
+- `D:\projects\Tessel\studio\strategy\PRODUCT.md`
+- `D:\projects\Tessel\studio\strategy\architecture\ARCHITECTURE.md`
+- `D:\projects\Tessel\studio\strategy\masterplan\MASTERPLAN-EN_US.md`
+- `D:\projects\Tessel\.gemini\STYLEGUIDE.md`
 
-## 🏗️ Monorepo Architecture
+## 🌟 Project Overview
 
-The project is divided into NPM workspaces for strict separation of concerns:
+**Tessel** is an immersive 3D multiplayer platform focused on voice interaction and spatial social experiences. It uses authoritative server-side logic and cutting-edge web technologies to deliver high-performance, low-latency gameplay.
 
-1.  **`packages/engine-core` (The Brain)**
-    - **Responsibility:** Contains the pure business logic, state machines (XState), configuration constants, global types, and internationalization.
-    - **Rule:** **Framework Agnostic**. Must NOT depend on React, Three.js (except math types), or DOM APIs. Strict TypeScript, no side effects.
+**CURRENT FOCUS**: Implementing character movement with optimized animations and transitioning the rendering engine to **WebGPU** using Three.js Node API (TSL).
 
-2.  **`packages/engine-react` (The View)**
-    - **Responsibility:** Render the experience to the user.
-    - **Tech:** React 19, React Three Fiber v9 (WebGPU Renderer), Zustand (UI State), TailwindCSS v4.
-    - **Core Tech:** **TSL (Three Shading Language)** for all materials and shaders. No raw GLSL strings.
-    - **Rule:** Consumes `engine-core` for logic. Focuses on declarative scenes, post-processing, and optimized render loops.
+## 🏗️ Architecture & Tech Stack
 
-3.  **`packages/engine-assets` (The Resources)**
-    - **Responsibility:** Store binary files and sources.
-    - **Content:** GLB/GLTF Models (Draco compressed), Blend Files, High-Res Textures.
-    - **Workflow:** Blender is used for layout/modeling only. Materials are replaced at runtime with TSL.
+### Workspace Structure (Monorepo)
 
-## 🛠️ Preferred Tech Stack
+- **`apps/web`**: Web platform entry point (Vite + React 19).
+- **`apps/desktop`**: Desktop platform entry point (Electron + Vite).
+- **`packages/game`**: Engine Core. R3F components, TSL Materials, Rapier hooks, and game systems.
+- **`packages/website`**: Landing pages, user dashboards, and general UI.
+- **`packages/backend`**: Fastify 5 server. Authoritative physics (Rapier), room management (Socket.io/WebRTC), and MongoDB.
+- **`packages/core`**: Shared logic. Zod schemas (SSOT), Constants, XState machines, and Types.
+- **`studio/`**: Assets processing, 3D models (GLB), strategy docs, and automation scripts.
 
-- **Frontend:** React 19, Vite.
-- **3D Engine:** Three.js (WebGPURenderer), React Three Fiber v9.
-- **Shaders:** **TSL (Three Shading Language)**. _Legacy GLSL strings and `onBeforeCompile` are strictly PROHIBITED._
-- **State Management:**
-  - **Complex Flows:** XState (in `engine-core`).
-  - **UI/Transient:** Zustand (in `engine-react`).
-- **Styling:** TailwindCSS v4.
-- **Linting:** ESLint v9 Flat Config (Strict Type-Checked).
+### Technology Stack
 
-## 📝 Conventions (Reinforced in STYLEGUIDE.md & ESLint)
+- **Graphics**: Three.js (v0.182+) with **WebGPU** priority and TSL (Three Shading Language).
+- **Physics**: Rapier (Deterministic, runs on both Client and Backend).
+- **Backend**: Fastify 5, Mongoose (MongoDB), Redis, BullMQ.
+- **Frontend**: React 19, Zustand, TailwindCSS v4, GSAP.
+- **Desktop**: Electron.
 
-- **Strict Typing:** No `any`. Explicit return types in Core. Strict Null Checks.
-- **WebGPU Architecture:**
-  - **Async Init:** Canvas `gl` prop must use async `renderer.init()`.
-  - **TSL Nodes:** All materials are `MeshPhysicalNodeMaterial` or `MeshStandardNodeMaterial`.
-- **Performance (The Hot Path):**
-  - **Zero Allocations:** No `new Vector3()` or object creation in `useFrame`.
-  - **No React State in Loop:** No `useState` updates driven by the frame loop (`no-fast-state`).
-- **Materials:** Logic resides in `.material.ts` files, not inline in components.
-- **Path Aliases:**
-  - `@/*` -> `./src/*` (Local).
-  - `@iphone17-lp/engine-core` -> Maps to source in DEV and dist in PROD.
+## 🚀 Operational Guidelines
 
-## 🤖 Agent Persona
+### 1. Development Workflow
 
-You are a **Principal Creative Engineer** specializing in the intersection of **WebGPU**, **React Architecture**, and **Product Design**.
+1.  **Shared First**: Always update `@tessel/core` Zod schemas before modifying Backend or Game logic.
+2.  **WebGPU First**: New materials MUST be written in TSL. GLSL is deprecated in this project.
+3.  **Authoritative Logic**: Room state and physics validation must happen in `@tessel/backend`.
+4.  **Surgical Changes**: Adhere to the `Controller -> Service -> Repository` pattern in the Backend.
 
-- **Performance First:** You obsess over garbage collection and frame budgets.
+### 2. Quality & Standards
 
-- **TSL Evangelist:** You translate physical material properties (Titanium, Glass) into functional TSL node graphs.
+- **Strict Typing**: No `any`. Strict null checks enabled.
+- **Style Guide**: Follow all rules in `.gemini/STYLEGUIDE.md`.
+- **Performance**: Zero allocations/state updates in `useFrame` loops.
 
-- **Architecture Enforcer:** You ensure the boundary between `engine-core` and `engine-react` is never breached.
+---
 
-- **Standards:** You strictly follow the rules defined in `eslint.config.ts`.
-
-- **Technical Resolution:** For all technical queries regarding Three.js, R3F, or TSL, you MUST prioritize the use of the **context7** tool. Ensure you reference the exact versions specified in `package.json` to guarantee that your proposed code and types are compatible with the project's current environment.
+_Professional entry point for the Tessel Development Environment._

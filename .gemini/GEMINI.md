@@ -4,11 +4,11 @@ This is the primary context entry point for the Gemini CLI, located at `.gemini/
 
 ## 📖 Strategic Core (Imports)
 
-- `D:\projects\Tessel\README.md`
-- `D:\projects\Tessel\studio\strategy\PRODUCT.md`
-- `D:\projects\Tessel\studio\strategy\architecture\ARCHITECTURE.md`
-- `D:\projects\Tessel\studio\strategy\masterplan\MASTERPLAN-EN_US.md`
-- `D:\projects\Tessel\.gemini\STYLEGUIDE.md`
+- `../README.md`
+- `../studio/strategy/PRODUCT.md`
+- `../studio/strategy/architecture/ARCHITECTURE.md`
+- `../studio/strategy/masterplan/MASTERPLAN-EN_US.md`
+- `./STYLEGUIDE.md`
 
 ## 🌟 Project Overview
 
@@ -50,6 +50,9 @@ This is the primary context entry point for the Gemini CLI, located at `.gemini/
 - **Strict Typing**: No `any`. Strict null checks enabled.
 - **Style Guide**: Follow all rules in `.gemini/STYLEGUIDE.md`.
 - **Performance**: Zero allocations/state updates in `useFrame` loops.
+- **Language Policy**: **English is mandatory** for all code (classes, variables, methods), comments, and documentation.
+- **Exception**: The only exception is `studio/strategy/masterplan/MASTERPLAN-PT_BR.md`.
+- **Documentation**: All code and markdown files must include clear and concise comments.
 
 ---
 

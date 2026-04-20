@@ -14,7 +14,7 @@
     "build:web": "npm run dev -w @tessel/app-web",
     "build:desktop": "npm run dev -w @tessel/app-desktop",
     "build:backend": "npm run dev -w @tessel/backend",
-    "start:backend": "npm run start -w @tessel/engine-server",
+    "start:backend": "npm run start -w @tessel/backend",
     "lint": "eslint ."
   },
   "dependencies": {

@@ -1,0 +1,43 @@
+{
+  "context": {
+    "fileName": ["GEMINI.md"],
+    "discoveryMaxDirs": 200,
+    "loadMemoryFromIncludeDirectories": true,
+    "fileFiltering": {
+      "enableRecursiveFileSearch": true,
+      "respectGitIgnore": false,
+      "respectGeminiIgnore": true,
+      "enableFuzzySearch": true
+    }
+  },
+  "advanced": {
+    "excludedEnvVars": []
+  },
+  "ide": {
+    "hasSeenNudge": true,
+    "enabled": true
+  },
+  "ui": {
+    "footer": {
+      "hideContextPercentage": false
+    },
+    "showMemoryUsage": true,
+    "showModelInfoInChat": true,
+    "showUserIdentity": true,
+    "incrementalRendering": false
+  },
+  // Its necessary to create (./.gemini/.env) file containing the keys GITHUB_MCP_PAT and CONTEXT7_API_KEY with your respect API keys
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github@latest"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  },
+  "experimental": {
+    "modelSteering": true
+  }
+}

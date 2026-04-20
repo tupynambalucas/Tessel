@@ -1,0 +1,10 @@
+{
+  "name": "@tessel/game",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@tessel/studio": "*",
+    "@tessel/core": "*"
+  }
+}

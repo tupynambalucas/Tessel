@@ -1,0 +1,18 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./packages/core" },
+    { "path": "./packages/backend" },
+    { "path": "./studio" },
+    { "path": "./packages/website/tsconfig.build.json" },
+    { "path": "./packages/game/tsconfig.build.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "tessel/core": ["packages/core/src/index.ts"],
+      "tessel/studio": ["studio/src/index.ts"]
+    }
+  }
+}

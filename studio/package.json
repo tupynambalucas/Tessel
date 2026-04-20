@@ -1,0 +1,24 @@
+{
+  "name": "@tessel/studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Elo Organico Workspace - Strategy, Design, and Content Management",
+  "scripts": {
+    "clean": "rimraf dist tsconfig.tsbuildinfo src/icons",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "sync:masterplan": "tsx scripts/sync-masterplan.ts",
+    "changelog:generate": "tsx scripts/generate-changelog.ts",
+    "build:assets": "tsx scripts/build-assets.ts"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.23.0",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
+    "dotenv": "^16.4.7",
+    "googleapis": "^146.0.0"
+  }
+}

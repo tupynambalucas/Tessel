@@ -1,0 +1,15 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noEmit": true,
+    "target": "ES2022"
+  },
+"include": ["electron.vite.config.*", "src/main/**/*", "src/preload/**/*", "src/env.d.ts"],
+  "exclude": ["src", "dist", "node_modules"]
+}

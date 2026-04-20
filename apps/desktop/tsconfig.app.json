@@ -1,0 +1,9 @@
+{
+  "extends": "../packages/game/tsconfig.app.json",
+  "compilerOptions": {
+    "paths": {
+      "@tessel/game": ["../packages/game/src/index.ts"]
+    }
+  },
+  "include": ["../packages/game/src/index.ts", "src/preload/index.d.ts", "../packages/engine-react"]
+}

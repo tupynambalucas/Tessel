@@ -1,0 +1,9 @@
+{
+  "extends": "../packages/game/tsconfig.app.json",
+  "compilerOptions": {
+    "paths": {
+      "@tessel/game": ["../packages/game/src/index.ts"]
+    }
+  },
+  "include": ["src", "../packages/game/src/index.ts"]
+}

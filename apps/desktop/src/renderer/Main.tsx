@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 // Importa o Launcher da engine
-import EngineReact from '@tupynambagame/engine-react/src/GameEngine';
+import EngineReact from '@tessel/game/src/GameEngine';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
@@ -9,14 +9,10 @@ const root = createRoot(container!);
 const handleDesktopGameStart = () => {
   console.log('Desktop: Solicitando tela cheia...');
   // Usa a API exposta pelo preload.ts
-  // @ts-ignore (pois window.electron é injetado pelo preload)
   if (window.electron && window.electron.ipcRenderer) {
     // Envia uma mensagem para o processo principal (Main Process)
-    // @ts-ignore
     window.electron.ipcRenderer.send('window-maximize');
   }
 };
 
-root.render(
-  <EngineReact onGameStart={handleDesktopGameStart} />
-);
+root.render(<EngineReact onGameStart={handleDesktopGameStart} />);

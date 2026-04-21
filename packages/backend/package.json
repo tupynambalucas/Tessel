@@ -45,7 +45,7 @@
     "mongoose": "^9.2.0",
     "pino-roll": "^4.0.0",
     "sdk-node-apis-efi": "^1.2.28",
-    "zod": "^4.3.6"
+    "zod": "4.3.6"
   },
   "devDependencies": {
     "@types/ioredis": "^5.0.0"

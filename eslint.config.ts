@@ -460,6 +460,87 @@ export default defineConfig([
     },
   },
   // ========================================================================
+  // APPS - Aplicações Hospedeiras (Web e Desktop)
+  // ========================================================================
+
+  // 1. App Web (Vite + React)
+  {
+    name: 'tessel/app-web',
+    files: ['apps/web/src/**/*.{ts,tsx}'],
+    plugins: {
+      react: reactPlugin,
+
+      'react-hooks': reactHooksPlugin as unknown as EslintPlugin,
+
+      'react-refresh': reactRefreshPlugin,
+    },
+    languageOptions: {
+      parserOptions: {
+        projectService: true, // Usa o TSConfig local mapeado pelo TypeScript
+        tsconfigRootDir: path.join(__dirname, 'apps/web'),
+      },
+    },
+    settings: {
+      react: { version: 'detect' }, // Diz ao ESLint para ler a versão do React do package.json
+    },
+    rules: {
+      // Importa as regras recomendadas do React
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+
+      // Regras Sênior para React Moderno (17+) e TypeScript
+      'react/react-in-jsx-scope': 'off', // O Vite não exige "import React from 'react'"
+      'react/prop-types': 'off', // Nós usamos Interfaces/Types do TypeScript, não PropTypes
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    },
+  },
+
+  // 2. App Desktop - Processos Nativos (Node.js / Electron Main & Preload)
+  {
+    name: 'tessel/app-desktop-node',
+    files: ['apps/desktop/src/main/**/*.ts', 'apps/desktop/src/preload/**/*.ts'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: path.join(__dirname, 'apps/desktop'),
+      },
+    },
+    rules: {
+      // Processos de backend do Electron geralmente precisam de logs estruturados
+      'no-console': 'off',
+      // Desliga regras de React aqui, pois Main/Preload NÃO usam React
+    },
+  },
+
+  // 3. App Desktop - Interface (Browser / React Renderer)
+  {
+    name: 'tessel/app-desktop-renderer',
+    files: ['apps/desktop/src/renderer/**/*.{ts,tsx}'],
+    plugins: {
+      react: reactPlugin,
+
+      'react-hooks': reactHooksPlugin as unknown as EslintPlugin,
+
+      'react-refresh': reactRefreshPlugin,
+    },
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: path.join(__dirname, 'apps/desktop'),
+      },
+    },
+    settings: {
+      react: { version: 'detect' },
+    },
+    rules: {
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    },
+  },
+  // ========================================================================
   // STUDIO - Internal tooling, scripts and art assets & 3d modeling
   // ========================================================================
   {
@@ -490,7 +571,9 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-call': 'off',
     },
   },
-  // 7. Generated Models
+  // ========================================================================
+  // Generated Models
+  // ========================================================================
   {
     name: 'tessel/generated-models-shimming',
     files: ['**/*.model.tsx'],

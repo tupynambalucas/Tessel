@@ -5,8 +5,8 @@
     { "path": "./tsconfig.node.json" },
 
     /* Bibliotecas Base (Core e Assets) */
-    { "path": "./packages/core/tsconfig.build.json" },
-    { "path": "./studio/tsconfig.build.json" },
+    { "path": "./packages/core" },
+    { "path": "./studio" },
 
     /* Módulos de Lógica e Engine */
     { "path": "./packages/game/tsconfig.build.json" },

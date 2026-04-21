@@ -9,18 +9,10 @@
       "@tessel/core": ["../packages/core/src/index.ts"]
     }
   },
-  "include": [
-    "src/renderer/**/*", 
-    "src/preload/index.d.ts",
-    "src/env.d.ts"
-  ],
-  "exclude": [
-    "node_modules", 
-    "out", 
-    "dist"
-  ],
+  "include": ["src/renderer/**/*", "src/preload/index.d.ts", "src/env.d.ts"],
+  "exclude": ["node_modules", "out", "dist"],
   "references": [
     { "path": "../../packages/game/tsconfig.build.json" },
-    { "path": "../../packages/core/tsconfig.build.json" }
+    { "path": "../../packages/core" }
   ]
 }

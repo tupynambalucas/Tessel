@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { Vector3, MathUtils } from 'three';
-import { CAMERA_SETTINGS } from '@tupynambagame/engine-core';
+import { CAMERA_SETTINGS } from '@tessel/core';
 
 interface CameraControllerProps {
   target: React.RefObject<any>;
@@ -9,7 +9,7 @@ interface CameraControllerProps {
 
 export const CameraController: React.FC<CameraControllerProps> = ({ target }) => {
   const { camera, gl } = useThree();
-  
+
   const state = useRef({
     distance: 5,
     phi: Math.PI / 4,
@@ -22,7 +22,7 @@ export const CameraController: React.FC<CameraControllerProps> = ({ target }) =>
       state.current.distance = MathUtils.clamp(
         state.current.distance + e.deltaY * 0.001 * CAMERA_SETTINGS.zoomSpeed,
         CAMERA_SETTINGS.minZoom,
-        CAMERA_SETTINGS.maxZoom
+        CAMERA_SETTINGS.maxZoom,
       );
     };
 
@@ -47,13 +47,13 @@ export const CameraController: React.FC<CameraControllerProps> = ({ target }) =>
   useFrame((_, delta) => {
     if (!target.current) return;
 
-    const targetPos = target.current.translation 
-      ? target.current.translation() 
+    const targetPos = target.current.translation
+      ? target.current.translation()
       : target.current.position;
 
     state.current.targetPosition.lerp(
       new Vector3(targetPos.x, targetPos.y + CAMERA_SETTINGS.heightOffset, targetPos.z),
-      delta / CAMERA_SETTINGS.smoothTime
+      delta / CAMERA_SETTINGS.smoothTime,
     );
 
     const x = state.current.distance * Math.sin(state.current.phi) * Math.sin(state.current.theta);
@@ -63,7 +63,7 @@ export const CameraController: React.FC<CameraControllerProps> = ({ target }) =>
     camera.position.set(
       state.current.targetPosition.x + x,
       state.current.targetPosition.y + y,
-      state.current.targetPosition.z + z
+      state.current.targetPosition.z + z,
     );
 
     camera.lookAt(state.current.targetPosition);

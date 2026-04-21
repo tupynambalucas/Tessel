@@ -18,23 +18,6 @@
     "start:backend": "npm run start -w @tessel/backend",
     "lint": "eslint ."
   },
-  "dependencies": {
-    "@xstate/react": "^6.0.0",
-    "@gsap/react": "^2.1.2",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.5.0",
-    "@react-three/postprocessing": "^3.0.4",
-    "@react-three/rapier": "^2.2.0",
-    "three": "^0.182.0",
-    "gsap": "^3.14.2",
-    "i18next": "^25.8.4",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-i18next": "^16.5.4",
-    "tone": "^15.1.22",
-    "zustand": "^5.0.11",
-    "tailwindcss": "^4.1.18"
-  },
   "devDependencies": {
     "eslint": "^9.39.2",
     "typescript-eslint": "^8.54.0",
@@ -58,9 +41,28 @@
     "typescript": "^5.9.3",
     "tsconfig-paths": "^4.2.0",
     "@types/node": "^25.2.1",
-    "tailwindcss": "^4.1.18",
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
     "@types/three": "^0.182.0"
+  },
+  "overrides": {
+    "@tessel/studio": "*",
+    "@tessel/core": "*",
+    "@xstate/react": "6.0.0",
+    "@gsap/react": "2.1.2",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.5.0",
+    "@react-three/postprocessing": "3.0.4",
+    "@react-three/rapier": "2.2.0",
+    "three": "0.182.0",
+    "gsap": "3.14.2",
+    "i18next": "25.8.4",
+    "react-i18next": "16.5.4",
+    "tone": "15.1.22",
+    "zustand": "5.0.11",
+    "tailwindcss": "4.1.18",
+    "zod": "4.3.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   }
 }

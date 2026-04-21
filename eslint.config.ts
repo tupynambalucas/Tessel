@@ -344,7 +344,123 @@ export default defineConfig([
     },
   },
   // ========================================================================
-  // PACKAGES/WORKSPACE - Internal tooling, scripts and art assets & 3d modeling
+  // PACKAGES/Website
+  // ========================================================================
+  {
+    name: 'tessel/packages-website',
+    files: ['packages/website/**/*.{js,mjs,ts,tsx}'],
+    ignores: [
+      'packages/website/src/types/**/*.d.ts',
+      'packages/website/**/*.d.ts',
+      'packages/website/src/vite-env.d.ts',
+    ],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: path.join(__dirname, 'packages/game'),
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    plugins: {
+      react: reactPlugin,
+
+      'react-hooks': reactHooksPlugin as unknown as EslintPlugin,
+
+      'react-refresh': reactRefreshPlugin,
+
+      '@react-three': reactThreePlugin as unknown as EslintPlugin,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+      'import/resolver': {
+        typescript: {
+          project: path.join(__dirname, 'packages/game/tsconfig.json'),
+          alwaysTryTypes: true,
+        },
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
+    },
+    rules: {
+      ...reactHooksPlugin.configs.recommended.rules,
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'error',
+
+      ...reactPlugin.configs.recommended.rules,
+      ...reactPlugin.configs['jsx-runtime'].rules,
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react/display-name': 'warn',
+      'react/no-array-index-key': 'warn',
+      'react/jsx-no-target-blank': 'error',
+      'react/jsx-key': ['error', { checkFragmentShorthand: true }],
+
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
+      'react/no-unknown-property': [
+        'error',
+        {
+          ignore: [
+            'dispose',
+            'castShadow',
+            'receiveShadow',
+            'geometry',
+            'material',
+            'userData',
+            'args',
+            'position',
+            'rotation',
+            'scale',
+            'intensity',
+            'rotation-x',
+            'rotation-y',
+            'rotation-z',
+            'lookAt',
+            'attach',
+            'target-position',
+            'envMapIntensity',
+            'shadow-bias',
+            'shadow-normalBias',
+            'shadow-mapSize',
+            'groundColor',
+          ],
+        },
+      ],
+
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            "CallExpression[callee.name='useFrame'] CallExpression[callee.name=/^set[A-Z]/]",
+          message:
+            'ERRO DE PERFORMANCE: Não utilize setters de estado (setState) dentro do loop useFrame. Isso causa re-renders a cada frame (60fps+). Utilize useRef e mutação direta para atualizações visuais.',
+        },
+      ],
+      '@react-three/no-clone-in-loop': 'error',
+      '@react-three/no-new-in-loop': 'error',
+      '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/ban-ts-comment': 'error',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/consistent-indexed-object-style': 'off',
+    },
+  },
+  // ========================================================================
+  // STUDIO - Internal tooling, scripts and art assets & 3d modeling
   // ========================================================================
   {
     name: 'tessel/studio',

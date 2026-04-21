@@ -1,14 +1,11 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
-    "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "noEmit": true,
-    "target": "ES2022"
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true
   },
-  "include": ["vite.config.ts", "*.config.ts"],
+  "include": ["vite.config.ts"],
   "exclude": ["src", "dist", "node_modules"]
 }

@@ -1,21 +1,17 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ESNext",
+    /* Força o rigor de ESM para compatibilidade com Fastify/Node moderno */
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "outDir": "dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+
     "composite": true,
-    "noEmit": false,
     "baseUrl": ".",
     "paths": {
+      /* HMR: lê a fonte do core em tempo real */
       "@tessel/core": ["../core/src/index.ts"]
     }
   },
   "include": ["src"],
-  "references": [{ "path": "../core" }]
+  "exclude": ["node_modules", "dist"]
 }

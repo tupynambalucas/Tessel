@@ -1,18 +1,20 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "rootDir": "./src",
-    "outDir": "./dist",
+    /* Habilita a emissão de arquivos */
     "noEmit": false,
-    "emitDeclarationOnly": true,
+    "outDir": "./dist",
+
+    /* Configuração para Monorepos (Project References) */
+    "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "sourceMap": true,
+    "emitDeclarationOnly": true,
+
+    /* Limpeza de código */
+    "removeComments": true
   },
-  "include": ["./**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.spec.*", "**/*.css", "**/*.module.css"],
-  "references": [{ "path": "../shared" }]
+  "references": [{ "path": "../core" }]
 }

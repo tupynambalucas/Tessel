@@ -2,21 +2,17 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "noEmit": false,
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationMap": true,
-    "paths": {
-      "@/*": ["./src/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@features/*": ["./src/features/*"],
-      "@domains/*": ["./src/domains/*"]
-    }
+    "noEmit": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.spec.*", "**/*.css", "**/*.module.css"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/*.css",
+    "**/*.module.css",
+    "vite.config.ts"
+  ],
   "references": [{ "path": "../core" }]
 }

@@ -1,15 +1,25 @@
 {
-  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
-    "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
-    "target": "ES2022"
+    "baseUrl": ".",
+    "paths": {
+      "@tessel/core": ["../packages/core/src/index.ts"]
+    }
   },
-"include": ["electron.vite.config.*", "src/main/**/*", "src/preload/**/*", "src/env.d.ts"],
-  "exclude": ["src", "dist", "node_modules"]
+  "include": [
+    "electron.vite.config.*", 
+    "src/main/**/*", 
+    "src/preload/**/*", 
+    "src/env.d.ts"
+  ],
+  "exclude": [
+    "src/renderer", 
+    "out", 
+    "dist", 
+    "node_modules"
+  ]
 }

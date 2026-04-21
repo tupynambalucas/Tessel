@@ -1,18 +1,20 @@
 {
   "files": [],
   "references": [
+    /* Configuração de Infraestrutura */
     { "path": "./tsconfig.node.json" },
-    { "path": "./packages/core" },
-    { "path": "./packages/backend" },
-    { "path": "./studio" },
+
+    /* Bibliotecas Base (Core e Assets) */
+    { "path": "./packages/core/tsconfig.build.json" },
+    { "path": "./studio/tsconfig.build.json" },
+
+    /* Módulos de Lógica e Engine */
+    { "path": "./packages/game/tsconfig.build.json" },
+    { "path": "./packages/backend/tsconfig.build.json" },
+
+    /* Interfaces e Consumidores Finais */
     { "path": "./packages/website/tsconfig.build.json" },
-    { "path": "./packages/game/tsconfig.build.json" }
-  ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "tessel/core": ["packages/core/src/index.ts"],
-      "tessel/studio": ["studio/src/index.ts"]
-    }
-  }
+    { "path": "./apps/web/tsconfig.app.json" },
+    { "path": "./apps/desktop/tsconfig.json" }
+  ]
 }

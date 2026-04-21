@@ -1,19 +1,18 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    /* Força o rigor de ESM (exige extensões .js nos imports) */
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "composite": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "noEmit": false,
     "declaration": true,
-    "declarationDir": "./dist",
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "composite": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "inlineSources": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

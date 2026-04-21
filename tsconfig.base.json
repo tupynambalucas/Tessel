@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+
+    /* Rigor / SOLID */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Interoperabilidade e Performance */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "incremental": true,
+
+    /* Resolução Global de Workspaces */
+    "baseUrl": ".",
+    "paths": {
+      "@tessel/core": ["./packages/core/src"],
+      "@tessel/game": ["./packages/game/src"],
+      "@tessel/backend": ["./packages/backend/src"],
+      "@tessel/studio": ["./studio/src"]
+    }
+  }
+}

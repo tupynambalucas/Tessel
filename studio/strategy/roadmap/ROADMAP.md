@@ -1,25 +1,30 @@
-# 🗺️ Tessel Strategic Roadmap
+# 🗺️ Tessel Strategic Roadmap (Master)
 
-## 🏁 Phase 1: Foundation (Current)
-- [x] Monorepo restructuring and package consolidation.
-- [x] Transition to **WebGPU** and **TSL** base.
-- [ ] Authoritative player movement with Rapier (Client/Server sync).
-- [ ] Character animation system (Idle, Walk, Run, Emotes).
-- [ ] Basic Room management (Create/Join).
+High-level vision and cross-package milestones.
 
-## 🗣️ Phase 2: Social Core
-- [ ] Positional Voice Chat integration (WebRTC/Spatial Audio).
-- [ ] Avatar customization system (Base modules).
-- [ ] Text chat and basic emoji reactions.
-- [ ] Room persistence (Basic world state saving).
+## 🏁 Phase 1: Foundational Movement & Rendering
+*Packages involved: Core, Game, Backend*
+- [x] Monorepo re-architecture.
+- [x] WebGPU/TSL Base.
+- [ ] **Milestone: Authoritative Movement.**
+- [ ] **Milestone: Animation System.**
 
-## 🚀 Phase 3: Expansion
-- [ ] Desktop App (Electron) parity with Web.
-- [ ] Advanced World Builder (In-game placement).
-- [ ] API for external integrations (Webhooks, Bot support).
-- [ ] Multi-region server orchestration.
+## 🗣️ Phase 2: The Social Experience
+*Packages involved: Backend, Website, Game*
+- [ ] **Milestone: Positional Voice Chat.**
+- [ ] **Milestone: Profile & Identity System.**
+- [ ] Room Discovery & Social Lobby.
 
-## 📈 Long-term Vision
-- Mobile platform support.
-- Scripting system for user-generated content.
-- Virtual economy and trade systems.
+## 🚀 Phase 3: Platform Expansion
+*Packages involved: Desktop, Web, Studio*
+- [ ] **Milestone: Desktop Parity (Electron).**
+- [ ] **Milestone: Advanced World Builder.**
+- [ ] Open Beta & Scalability Tests.
+
+---
+
+## 🔗 Sub-Roadmaps
+- [🎮 Game Engine](./ROADMAP-GAME.md)
+- [🖥️ Backend & Authority](./ROADMAP-BACKEND.md)
+- [🧠 Core Logic](./ROADMAP-CORE.md)
+- [🎨 Studio & Assets](./ROADMAP-STUDIO.md)

@@ -1,9 +1,26 @@
 {
-  "extends": "../packages/game/tsconfig.app.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "composite": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
-      "@tessel/game": ["../packages/game/src/index.ts"]
+      "@tessel/game": ["../packages/game/src/index.ts"],
+      "@tessel/core": ["../packages/core/src/index.ts"]
     }
   },
-  "include": ["../packages/game/src/index.ts", "src/preload/index.d.ts", "../packages/engine-react"]
+  "include": [
+    "src/renderer/**/*", 
+    "src/preload/index.d.ts",
+    "src/env.d.ts"
+  ],
+  "exclude": [
+    "node_modules", 
+    "out", 
+    "dist"
+  ],
+  "references": [
+    { "path": "../../packages/game/tsconfig.build.json" },
+    { "path": "../../packages/core/tsconfig.build.json" }
+  ]
 }

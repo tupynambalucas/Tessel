@@ -1,4 +1,4 @@
-# @tessel/app-desktop - Desktop Application
+# @tessel/client-desktop - Desktop Application
 
 Desktop version of Tessel, built with **Electron** and **Vite**. It provides a native experience with enhanced performance and deep system integration for voice chat.
 
@@ -20,11 +20,12 @@ npm run dev
 ### Build
 
 ```bash
-# For Windows
-npm run build:win
+npm run build
+```
 
-# For macOS
-npm run build:mac
+---
+*Native Platform - Tessel*
+
 ```
 
 ## 🏗 Architecture

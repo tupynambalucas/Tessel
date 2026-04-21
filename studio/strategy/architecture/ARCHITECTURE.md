@@ -6,10 +6,10 @@ This document describes the high-level architecture of **Tessel**, a 3D Multipla
 
 ```mermaid
 graph TD
-    AppWeb[apps/web] --> Game[@tessel/game]
-    AppDesktop[apps/desktop] --> Game
+    AppWeb[apps/client-web] --> Game[@tessel/game]
+    AppDesktop[apps/client-desktop] --> Game
     Game --> Core[@tessel/core]
-    Backend[@tessel/backend] --> Core
+    Api[@tessel/api] --> Core
     Game --> Studio[@tessel/studio]
 
     subgraph "Presentation Layer (Client)"
@@ -25,8 +25,9 @@ graph TD
         Zod[Validation Schemas]
     end
 
-    subgraph "Authoritative Layer (Server)"
-        Backend
+    subgraph "Host Layer"
+        Api
+        Www[apps/www]
         Fastify[Fastify 5]
         RapierServer[Rapier Server Physics]
         Mongo[MongoDB / Mongoose]
@@ -45,7 +46,7 @@ graph TD
 - **Client Physics**: Local prediction and interpolation using Rapier.
 - **Spatial Audio**: Real-time positional voice chat integration.
 
-### 3. `@tessel/backend` (The Authority)
+### 3. `@tessel/api` (The Authority)
 **Role:** Authoritative server orchestration.
 - **Validation**: Server-side physics validation via Rapier to prevent cheating.
 - **Room Management**: Instance-based room management with Fastify 5.
@@ -58,10 +59,10 @@ graph TD
 
 ## 🔄 Data & Physics Flow
 
-1.  **Input**: User moves their character in `app-web`.
+1.  **Input**: User moves their character in `apps/client-web`.
 2.  **Prediction**: `game` package simulates the move locally for immediate feedback.
-3.  **Synchronization**: The move is sent to `backend` via a secure socket.
-4.  **Validation**: `backend` runs the same move in its Rapier instance.
+3.  **Synchronization**: The move is sent to `api` via a secure socket.
+4.  **Validation**: `api` runs the same move in its Rapier instance.
 5.  **Reconciliation**: If valid, the move is broadcasted to other players. If invalid, the client is corrected.
 
 ## 🛠️ Build & Tooling

@@ -20,11 +20,11 @@ This is the primary context entry point for the Gemini CLI, located at `.gemini/
 
 ### Workspace Structure (Monorepo)
 
-- **`apps/web`**: Web platform entry point (Vite + React 19).
-- **`apps/desktop`**: Desktop platform entry point (Electron + Vite).
+- **`apps/client-web`**: Web platform entry point (Vite + React 19).
+- **`apps/client-desktop`**: Desktop platform entry point (Electron + Vite).
 - **`packages/game`**: Engine Core. R3F components, TSL Materials, Rapier hooks, and game systems.
-- **`packages/website`**: Landing pages, user dashboards, and general UI.
-- **`packages/backend`**: Fastify 5 server. Authoritative physics (Rapier), room management (Socket.io/WebRTC), and MongoDB.
+- **`apps/www`**: Landing pages, user dashboards, and general UI.
+- **`apps/api`**: Fastify 5 server. Authoritative physics (Rapier), room management (Socket.io/WebRTC), and MongoDB.
 - **`packages/core`**: Shared logic. Zod schemas (SSOT), Constants, XState machines, and Types.
 - **`studio/`**: Assets processing, 3D models (GLB), strategy docs, and automation scripts.
 
@@ -42,7 +42,7 @@ This is the primary context entry point for the Gemini CLI, located at `.gemini/
 
 1.  **Shared First**: Always update `@tessel/core` Zod schemas before modifying Backend or Game logic.
 2.  **WebGPU First**: New materials MUST be written in TSL. GLSL is deprecated in this project.
-3.  **Authoritative Logic**: Room state and physics validation must happen in `@tessel/backend`.
+3.  **Authoritative Logic**: Room state and physics validation must happen in `@tessel/api`.
 4.  **Surgical Changes**: Adhere to the `Controller -> Service -> Repository` pattern in the Backend.
 
 ### 2. Quality & Standards

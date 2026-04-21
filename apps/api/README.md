@@ -1,4 +1,4 @@
-# @tessel/backend - API & Authoritative Server
+# @tessel/api - API & Authoritative Server
 
 Authoritative server for the Tessel game, developed with Fastify 5 and Mongoose. It manages the game state, physics validation, and real-time room orchestration.
 

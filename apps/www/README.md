@@ -1,4 +1,4 @@
-# @tessel/website - Web Interface & Dashboard
+# @tessel/www - Web Interface & Dashboard
 
 User interface for the Tessel platform outside the main 3D engine. It handles landing pages, user settings, and social dashboards.
 

@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'node:path';
 import svgr from 'vite-plugin-svgr';
-import glsl from 'vite-plugin-glsl';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
@@ -12,13 +11,6 @@ export default defineConfig({
     tsconfigPaths(),
     svgr({
       include: '**/*.svg?react',
-    }),
-    glsl({
-      include: ['**/*.glsl', '**/*.wgsl', '**/*.vert', '**/*.frag', '**/*.vs', '**/*.fs'],
-      warnDuplicatedImports: true,
-      minify: false,
-      watch: true,
-      root: '/',
     }),
   ],
 

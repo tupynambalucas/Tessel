@@ -3,20 +3,26 @@
 High-level vision and cross-package milestones.
 
 ## 🏁 Phase 1: Foundational Movement & Rendering
-*Packages involved: Core, Game, Backend*
+
+_Packages involved: Core, Game, Api_
+
 - [x] Monorepo re-architecture.
-- [x] WebGPU/TSL Base.
+- [ ] WebGPU/TSL Base.
 - [ ] **Milestone: Authoritative Movement.**
 - [ ] **Milestone: Animation System.**
 
 ## 🗣️ Phase 2: The Social Experience
-*Packages involved: Backend, Website, Game*
+
+_Packages involved: Api, Website, Game_
+
 - [ ] **Milestone: Positional Voice Chat.**
 - [ ] **Milestone: Profile & Identity System.**
 - [ ] Room Discovery & Social Lobby.
 
 ## 🚀 Phase 3: Platform Expansion
-*Packages involved: Desktop, Web, Studio*
+
+_Packages involved: Desktop, Web, Studio_
+
 - [ ] **Milestone: Desktop Parity (Electron).**
 - [ ] **Milestone: Advanced World Builder.**
 - [ ] Open Beta & Scalability Tests.
@@ -24,7 +30,8 @@ High-level vision and cross-package milestones.
 ---
 
 ## 🔗 Sub-Roadmaps
+
 - [🎮 Game Engine](./ROADMAP-GAME.md)
-- [🖥️ Backend & Authority](./ROADMAP-BACKEND.md)
+- [🖥️ Api & Authority](./ROADMAP-Api.md)
 - [🧠 Core Logic](./ROADMAP-CORE.md)
 - [🎨 Studio & Assets](./ROADMAP-STUDIO.md)

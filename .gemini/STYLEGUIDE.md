@@ -16,17 +16,27 @@ Type safety is paramount for the stability of our WebGPU pipeline and authoritat
 ## 🏗️ 2. Architecture & Guiding Principles
 
 ### 2.1. Monorepo Structure (NPM Workspaces)
-- **`apps/`**: Platform entry points (`app-web` via Vite, `app-desktop` via Electron).
-- **`packages/core`**: **Single Source of Truth (SSOT)**. Contains Zod schemas, constants, i18n, and shared state logic (XState).
-- **`packages/game`**: Game engine core. Three.js components, R3F hooks, and client-side physics.
-- **`packages/backend`**: Fastify server. Manages authoritative rooms, MongoDB persistence, and server-side Rapier physics.
-- **`packages/website`**: Web interface, dashboards, and landing pages.
-- **`studio/`**: Asset management, model processing scripts, and strategic documentation.
+
+The project is organized into `apps/` and `packages/`. **Apps** represent end-products or host environments, while **Packages** provide shared core logic and the game engine.
+
+- **`apps/`**: Host environments and products.
+  - **Hosts (Core Products)**:
+    - **`api` (@tessel/api)**: The authoritative backend. A Fastify 5 server that manages real-time room synchronization, server-side physics (Rapier), and database persistence (MongoDB).
+    - **`www` (@tessel/www)**: The public-facing product. A React 19 website handling landing pages, user dashboards, and social features outside the game loop.
+  - **Client Platforms (Entry Points)**:
+    - **`client-web` (@tessel/client-web)**: A thin Vite wrapper that initializes the `@tessel/game` engine for web browsers.
+    - **`client-desktop` (@tessel/client-desktop)**: An Electron wrapper that provides a native host for `@tessel/game`, enabling desktop-specific integrations.
+
+- **`packages/`**: Reusable business logic and engine cores.
+  - **`core` (@tessel/core)**: **Single Source of Truth (SSOT)**. Contains all Zod schemas, shared constants, i18n locales, and XState machines.
+  - **`game` (@tessel/game)**: The core 3D engine. Contains R3F components, TSL materials, and client-side physics hooks.
+
+- **`studio/`**: Strategic hub and asset pipeline. Contains Blender automation scripts, 3D model processing, and design tokens.
 
 ### 2.2. Design Patterns
-- **DDD (Domain-Driven Design)**: Business logic organized into domains.
+- **DDD (Domain-Driven Design)**: Business logic organized into domains (e.g., `auth`, `rooms`, `players`).
 - **SOLID Principles**: Focus on Single Responsibility and Dependency Inversion (`game` depends on `core` interfaces).
-- **Controller-Service-Repository**: Mandatory pattern for `@tessel/backend`.
+- **Controller-Service-Repository**: Mandatory pattern for `@tessel/api` to separate transport, logic, and persistence layers.
 
 ## ⚛️ 3. 3D Engine & Rendering (WebGPU/TSL)
 

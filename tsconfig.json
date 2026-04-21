@@ -14,7 +14,7 @@
     /* Interfaces e Consumidores Finais */
     { "path": "./apps/api/tsconfig.build.json" },
     { "path": "./apps/www/tsconfig.build.json" },
-    { "path": "./apps/client-web/tsconfig.app.json" },
+    { "path": "./apps/client-web/tsconfig.json" },
     { "path": "./apps/client-desktop/tsconfig.json" }
   ]
 }

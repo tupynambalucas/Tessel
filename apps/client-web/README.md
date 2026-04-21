@@ -1,4 +1,4 @@
-# @tessel/app-web - Web Application
+# @tessel/client-web - Web Application
 
 This is the web platform for Tessel, a 3D multiplayer voice chat game. Built with React 19 and Vite, it delivers a high-performance experience directly in the browser using **WebGPU**.
 
@@ -26,7 +26,7 @@ npm run build
 
 ## 🏗 Architecture
 
-The web app acts as a thin wrapper around the `@tessel/game` and `@tessel/website` packages, orchestrating the 3D canvas and the UI overlays.
+The web app acts as a thin wrapper around the `@tessel/game` and `@tessel/www` packages, orchestrating the 3D canvas and the UI overlays.
 
 ---
 *Web Entry Point - Tessel*

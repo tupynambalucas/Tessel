@@ -8,7 +8,7 @@ O Tessel é uma plataforma social espacial 3D de alta performance. Nosso objetiv
 Utilizamos **WebGPU** para trazer gráficos de nível desktop para o navegador. Ao usar **Three Shading Language (TSL)**, garantimos uma renderização preparada para o futuro que pode escalar entre dispositivos.
 
 ### 2.2. Arquitetura Autoritativa
-Ao contrário de muitos jogos web, o Tessel utiliza um modelo de servidor autoritativo. O `@tessel/backend` valida toda a física e mudanças de estado, garantindo uma experiência segura e sincronizada.
+Ao contrário de muitos jogos web, o Tessel utiliza um modelo de servidor autoritativo. O `@tessel/api` valida toda a física e mudanças de estado, garantindo uma experiência segura e sincronizada.
 
 ### 2.3. Assets Modulares
 Nosso pacote `studio/` atua como um pipeline especializado, transformando assets de alta qualidade em recursos otimizados para web sem perder a fidelidade visual.

@@ -1,0 +1,16 @@
+services:
+  db:
+    ports:
+      - '27017:27017'
+    restart: 'no'
+
+  redis:
+    ports:
+      - '6379:6379'
+    restart: 'no'
+
+  api:
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: development

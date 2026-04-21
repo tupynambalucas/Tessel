@@ -44,7 +44,7 @@ const schema = {
 };
 
 const envConfig = async (server: FastifyInstance) => {
-  const rootEnvPath = path.join(__dirname, '../../.env');
+  const rootEnvPath = path.join(__dirname, '../../../../.env');
 
   await server.register(fastifyEnv, {
     confKey: 'config',

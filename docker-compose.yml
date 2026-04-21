@@ -1,0 +1,89 @@
+services:
+  db:
+    image: mongo:7.0
+    container_name: tessel_db
+    restart: always
+    entrypoint:
+      - bash
+      - -c
+      - |
+        cp /tmp/mongo-keyfile /data/mongo-keyfile
+        chmod 400 /data/mongo-keyfile
+        chown 999:999 /data/mongo-keyfile
+        exec docker-entrypoint.sh $$@
+    command: ['mongod', '--replSet', 'rs0', '--bind_ip_all', '--keyFile', '/data/mongo-keyfile']
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
+      MONGO_REPLICA_SET_NAME: rs0
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-keyfile:/tmp/mongo-keyfile:ro
+    networks:
+      - tessel_network
+    healthcheck:
+      test: |
+        test $$(mongosh -u "$$MONGO_INITDB_ROOT_USERNAME" -p "$$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --quiet --eval "try { rs.status().ok } catch(e) { 0 }") -eq 1 \
+        || mongosh -u "$$MONGO_INITDB_ROOT_USERNAME" -p "$$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --quiet --eval "rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'db:27017'}]})"
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  redis:
+    image: redis:alpine
+    container_name: tessel_redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - tessel_network
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: tessel_api
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - SERVER_PORT=${SERVER_PORT}
+      - SERVER_HOST=0.0.0.0
+      - MONGO_URI=mongodb://${MONGO_USER}:${MONGO_PASSWORD}@db:27017/${MONGO_DB_NAME}?authSource=admin&replicaSet=rs0
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - JWT_SECRET=${JWT_SECRET}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - USER_SESSION_KEY=${USER_SESSION_KEY}
+      - ADMIN_USER_SEED=${ADMIN_USER_SEED}
+      - ADMIN_EMAIL_SEED=${ADMIN_EMAIL_SEED}
+      - ADMIN_PASS_SEED=${ADMIN_PASS_SEED}
+    volumes:
+      - api_logs:/app/apps/api/logs
+    networks:
+      - tessel_network
+    healthcheck:
+      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://localhost:3000/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  mongo_data:
+  api_logs:
+  redis_data:
+
+networks:
+  tessel_network:
+    driver: bridge

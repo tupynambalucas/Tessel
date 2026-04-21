@@ -9,13 +9,13 @@
     "apps/*"
   ],
   "scripts": {
-    "dev:web": "npm run dev -w @tessel/app-web",
-    "dev:desktop": "npm run dev -w @tessel/app-desktop",
-    "dev:backend": "npm run dev -w @tessel/backend",
-    "build:web": "npm run dev -w @tessel/app-web",
-    "build:desktop": "npm run dev -w @tessel/app-desktop",
-    "build:backend": "npm run dev -w @tessel/backend",
-    "start:backend": "npm run start -w @tessel/backend",
+    "dev:client-web": "npm run dev -w @tessel/client-web",
+    "dev:client-desktop": "npm run dev -w @tessel/client-desktop",
+    "dev:api": "npm run dev -w @tessel/api",
+    "build:client-web": "npm run dev -w @tessel/client-web",
+    "build:client-desktop": "npm run dev -w @tessel/client-desktop",
+    "build:api": "npm run dev -w @tessel/api",
+    "start:api": "npm run start -w @tessel/api",
     "lint": "eslint ."
   },
   "devDependencies": {

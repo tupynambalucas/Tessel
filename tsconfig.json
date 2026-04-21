@@ -10,11 +10,11 @@
 
     /* Módulos de Lógica e Engine */
     { "path": "./packages/game/tsconfig.build.json" },
-    { "path": "./packages/backend/tsconfig.build.json" },
 
     /* Interfaces e Consumidores Finais */
-    { "path": "./packages/website/tsconfig.build.json" },
-    { "path": "./apps/web/tsconfig.app.json" },
-    { "path": "./apps/desktop/tsconfig.json" }
+    { "path": "./apps/api/tsconfig.build.json" },
+    { "path": "./apps/www/tsconfig.build.json" },
+    { "path": "./apps/client-web/tsconfig.app.json" },
+    { "path": "./apps/client-desktop/tsconfig.json" }
   ]
 }

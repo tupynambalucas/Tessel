@@ -14,5 +14,5 @@
     "**/*.module.css",
     "vite.config.ts"
   ],
-  "references": [{ "path": "../core" }]
+  "references": [{ "path": "../../packages/core" }]
 }

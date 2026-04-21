@@ -13,7 +13,7 @@
       "@features/*": ["./src/features/*"],
       "@domains/*": ["./src/domains/*"],
       /* Desenvolvimento instantâneo: lê a fonte do core */
-      "@tessel/core": ["../core/src/index.ts"]
+      "@tessel/core": ["../../packages/core/src/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/types/**/*.d.ts", "vite.config.ts"],

@@ -1,5 +1,5 @@
 {
-  "name": "@tessel/app-desktop",
+  "name": "@tessel/client-desktop",
   "version": "0.1.0",
   "type": "module",
   "description": "An Electron application with React and TypeScript",

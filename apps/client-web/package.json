@@ -1,5 +1,5 @@
 {
-  "name": "@tessel/app-web",
+  "name": "@tessel/client-web",
   "private": true,
   "version": "0.0.0",
   "type": "module",

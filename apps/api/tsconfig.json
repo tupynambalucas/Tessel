@@ -9,7 +9,7 @@
     "baseUrl": ".",
     "paths": {
       /* HMR: lê a fonte do core em tempo real */
-      "@tessel/core": ["../core/src/index.ts"]
+      "@tessel/core": ["../../packages/core/src/index.ts"]
     }
   },
   "include": ["src"],

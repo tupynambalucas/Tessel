@@ -12,9 +12,9 @@ import '@fastify/session';
 import '@fastify/jwt';
 import { type IUser } from '@tessel/core';
 
-import { AuthController } from '../domains/auth/auth.controller.js';
+import { AuthController } from '../domains/auth/auth.controller.ts';
 
-import { IUserDocument } from '../models/user.model.js';
+import { IUserDocument } from '../models/user.model.ts';
 
 export type UserPayload = Pick<IUser, 'email' | 'username' | 'role' | 'icon'> & {
   _id: string;

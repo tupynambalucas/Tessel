@@ -1,21 +1,24 @@
-# @tessel/www - Web Interface & Dashboard
+# @tessel/www - The Social Hub
 
-User interface for the Tessel platform outside the main 3D engine. It handles landing pages, user settings, and social dashboards.
+The **Social Hub** is the heart of the Tessel ecosystem's asynchronous engagement. It is a full-featured social platform where users manage their identities, interact with communities, and participate in the persistent economy.
+
+## 🚀 Key Responsibilities
+
+- **Unified Identity**: Acts as the primary Identity Provider (SSO) for all Tessel instances.
+- **Social Networking**: 
+  - **Timelines**: Global and personal feeds for sharing status updates and 3D media captures.
+  - **Communities**: Specialized groups for discussion, event planning, and niche interests.
+  - **Messaging**: Private and group text-based chat systems.
+- **Persistent Economy**: 
+  - **Marketplace**: Central shop for acquiring 3D items, avatars, and room customizations.
+  - **Inventory**: Management of digital assets that are instantly available in 3D Instances.
 
 ## 🛠 Tech Stack
 
-- **Core**: React 19
-- **Build**: Vite
+- **Core**: React 19 (High-performance UI)
 - **Styling**: TailwindCSS v4
-- **State**: Zustand
-- **Communication**: Axios (Centralized API client)
-
-## 📂 Directory Structure
-
-- `src/components/`: Reusable UI components.
-- `src/features/`: Functional modules (Auth, Dashboard, Landing).
-- `src/domains/`: API integration and stores.
-- `src/i18n/`: Translation setup.
+- **State**: Zustand (Asynchronous social state)
+- **Integration**: Axios for RESTful social data and Socket.io for real-time notifications.
 
 ---
-*Web Platform & UI - Tessel*
+*The asynchronous foundation of spatial social networking.*

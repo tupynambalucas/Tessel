@@ -7,12 +7,12 @@
 
 ---
 
-## 🚀 Project Status: Alpha
+## 🚀 Project Status: Alpha (Hybrid Social Ecosystem)
 
-This consolidated roadmap provides a high-level view of the Tessel ecosystem, distilling information from all modular roadmaps.
+This consolidated roadmap distillates the vision for the **Social Hub** and **3D Instances**, providing a high-level dashboard of the Tessel project.
 
-### 🏛️ High-Level Vision
-For the full strategic vision and implementation phases, see **[docs/roadmaps/STRATEGY.md](./docs/roadmaps/STRATEGY.md)**.
+### 🏙️ Hybrid Vision: Hub & Instance
+For the full strategic details on the asynchronous social layer and immersive 3D world, see **[docs/roadmaps/STRATEGY.md](./docs/roadmaps/STRATEGY.md)**.
 
 ---
 
@@ -20,11 +20,12 @@ For the full strategic vision and implementation phases, see **[docs/roadmaps/ST
 
 | Domain | Status | Current Milestone |
 | :--- | :--- | :--- |
-| **Global Strategy** | Phase 1 | DGS & Matchmaking |
-| **Backend (@tessel/api)** | Phase 1 | Matchmaker Implementation |
-| **Game Engine (@tessel/game)** | Phase 1 | WebGPU & Network Sync |
+| **Global Strategy** | Phase 1 | Ecosystem Foundation & DGS |
+| **Social Hub (@tessel/www)** | Phase 1 | Identity & SSO Foundation |
+| **Backend (@tessel/api)** | Phase 1 | Matchmaker & Room Instancing |
+| **Game Engine (@tessel/game)** | Phase 1 | WebGPU & Geckos.io Sync |
 | **Core (@tessel/core)** | Phase 1 | Data Contracts & Binary Protocols |
-| **Studio (@tessel/studio)** | Phase 1 | Asset Pipeline & CI/CD |
+| **Studio (@tessel/studio)** | Phase 1 | Asset Pipeline & Automation |
 
 ---
 
@@ -33,6 +34,7 @@ For the full strategic vision and implementation phases, see **[docs/roadmaps/ST
 For detailed technical progress in specific areas, refer to the individual roadmaps:
 
 - **[Global Strategy](./docs/roadmaps/STRATEGY.md)**
+- **[Social Hub (WWW)](./docs/roadmaps/WWW.md)**
 - **[Backend & DGS](./docs/roadmaps/BACKEND.md)**
 - **[Game Engine](./docs/roadmaps/GAME.md)**
 - **[Core Logic](./docs/roadmaps/CORE.md)**

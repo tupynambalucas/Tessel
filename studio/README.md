@@ -1,19 +1,24 @@
-# @tessel/studio - Assets & Strategy Hub
+# @tessel/studio - Assets, Automation & Distribution Hub
 
-Central hub for asset management, strategic documentation, and automation tools for the Tessel ecosystem.
+The **Studio** is the engine room for the Tessel ecosystem's resources. It manages the automated processing of 3D assets, strategic synchronization, and AI-powered documentation workflows.
 
-## 📂 Structure
+## 📂 Core Responsibilities
 
-- **`brand/`**: Design tokens and raw assets.
-- **`content/`**: Legal documents and AI-generated changelogs.
-- **`strategy/`**: Living documentation (Master Plan, Roadmap, Architecture).
-- **`scripts/`**: Automation scripts for asset pipelines and strategy sync.
+- **Asset Pipeline (`brand/`, `local/`)**: Automated conversion, optimization, and distribution of 3D models (GLB), textures, and design tokens.
+- **Automation Scripts (`scripts/`)**: 
+  - **Asset Processing**: GLB to TSL optimization.
+  - **Governance Automation**: AI-powered (Gemini) consolidation of atomic roadmaps and changelogs.
+  - **Strategy Sync**: Aligning external strategic data with the local `docs/` hub.
+- **Distribution**: Managing the delivery of optimized assets to the Game Engine and CDN.
 
-## 🚀 Key Scripts
+## 🚀 Key Automation Tools
 
-- `npm run build:assets`: Transforms raw SVGs into React components.
-- `npm run sync:masterplan`: Pulls strategic documentation from external sources.
-- `npm run changelog:generate`: AI-powered changelog generation via Gemini.
+- `npm run build:assets`: Transforms raw SVGs and 3D models into optimized engine components.
+- `npm run generate:changelog`: AI-powered script that gathers fragments from `docs/changelogs/` and updates the root `CHANGELOG.md`.
+- `npm run sync:roadmap`: Consolidates modular roadmaps from `docs/roadmaps/` into the master `ROADMAP.md`.
+
+## 📜 Governance Notice
+Strategic documentation has been moved to the project's central **[docs/](../docs/)** directory to ensure enterprise-level visibility and accessibility.
 
 ---
-*Asset & Governance Hub - Tessel*
+*Asset & Automation Hub - Tessel Studio*

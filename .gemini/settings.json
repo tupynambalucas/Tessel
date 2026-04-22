@@ -35,6 +35,13 @@
     "context7": {
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "blender": {
+      "command": "cmd",
+      "args": ["/c", "uvx", "blender-mcp"],
+      "env": {
+        "DISABLE_TELEMETRY": "true"
+      }
     }
   },
   "experimental": {

@@ -5,10 +5,14 @@ This is the primary context entry point for the Gemini CLI, located at `.gemini/
 ## 📖 Strategic Core (Imports)
 
 - `../README.md`
-- `../studio/strategy/PRODUCT.md`
-- `../studio/strategy/architecture/ARCHITECTURE.md`
-- `../studio/strategy/masterplan/MASTERPLAN-EN_US.md`
-- `./STYLEGUIDE.md`
+- `../CONTRIBUTING.md`
+- `../ROADMAP.md`
+- `../CHANGELOG.md`
+- `../docs/PRODUCT.md`
+- `../docs/ARCHITECTURE.md`
+- `../docs/MASTERPLAN.md`
+- `../docs/STYLEGUIDE.md`
+- `../docs/roadmaps/STRATEGY.md`
 
 ## 🌟 Project Overview
 
@@ -16,43 +20,15 @@ This is the primary context entry point for the Gemini CLI, located at `.gemini/
 
 **CURRENT FOCUS**: Implementing character movement with optimized animations and transitioning the rendering engine to **WebGPU** using Three.js Node API (TSL).
 
-## 🏗️ Architecture & Tech Stack
+## 🏗️ Architecture & Technical Guidance
 
-### Workspace Structure (Monorepo)
+All architectural decisions, monorepo structure, and technology stack details are centralized in the **[Architecture Overview](../docs/ARCHITECTURE.md)**.
 
-- **`apps/client-web`**: Web platform entry point (Vite + React 19).
-- **`apps/client-desktop`**: Desktop platform entry point (Electron + Vite).
-- **`packages/game`**: Engine Core. R3F components, TSL Materials, Rapier hooks, and game systems.
-- **`apps/www`**: Landing pages, user dashboards, and general UI.
-- **`apps/api`**: Fastify 5 server. Authoritative physics (Rapier), room management (Socket.io/WebRTC), and MongoDB.
-- **`packages/core`**: Shared logic. Zod schemas (SSOT), Constants, XState machines, and Types.
-- **`studio/`**: Assets processing, 3D models (GLB), strategy docs, and automation scripts.
+## 🚀 Operational Guidelines & Standards
 
-### Technology Stack
+All development workflows, coding standards, and quality requirements are defined in the **[Style Guide](../docs/STYLEGUIDE.md)**.
 
-- **Graphics**: Three.js (v0.182+) with **WebGPU** priority and TSL (Three Shading Language).
-- **Physics**: Rapier (Deterministic, runs on both Client and Backend).
-- **Backend**: Fastify 5, Mongoose (MongoDB), Redis, BullMQ.
-- **Frontend**: React 19, Zustand, TailwindCSS v4, GSAP.
-- **Desktop**: Electron.
-
-## 🚀 Operational Guidelines
-
-### 1. Development Workflow
-
-1.  **Shared First**: Always update `@tessel/core` Zod schemas before modifying Backend or Game logic.
-2.  **WebGPU First**: New materials MUST be written in TSL. GLSL is deprecated in this project.
-3.  **Authoritative Logic**: Room state and physics validation must happen in `@tessel/api`.
-4.  **Surgical Changes**: Adhere to the `Controller -> Service -> Repository` pattern in the Backend.
-
-### 2. Quality & Standards
-
-- **Strict Typing**: No `any`. Strict null checks enabled.
-- **Style Guide**: Follow all rules in `.gemini/STYLEGUIDE.md`.
-- **Performance**: Zero allocations/state updates in `useFrame` loops.
-- **Language Policy**: **English is mandatory** for all code (classes, variables, methods), comments, and documentation.
-- **Exception**: The only exception is `studio/strategy/masterplan/MASTERPLAN-PT_BR.md`.
-- **Documentation**: All code and markdown files must include clear and concise comments.
+**Mandatory Compliance**: Adherence to both the Architecture and Style Guide is required for all contributions to ensure consistency, performance, and maintainability across the Tessel ecosystem.
 
 ---
 
